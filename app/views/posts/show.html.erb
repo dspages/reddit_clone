@@ -1,0 +1,32 @@
+<div class="container-fluid text-center">
+  <% @post.subs.each do |sub| %>
+  <p>  <%= link_to "Back To: #{sub.title}", sub_url(sub) %> </p>
+  <% end %>
+  <h3> Post Title: <%= @post.title %> </h3>
+  <p> By: <%= link_to @post.author.username , user_url(@post.author) %> </p>
+  <%= link_to "Linked Content", @post.url %>
+
+  <h4 class="text-left"> Post Content: </h4>
+  <div class="jumbotron">
+
+    <p> <%= @post.content %></p>
+  </div>
+  <% if current_user==@post.author %>
+    <%= link_to "Edit Post", edit_post_url(@post) %>
+    <%= link_to "Delete Post", post_url(@post), :method => :delete %>
+
+  <form class="" action="<%=post_subs_url%>" method="post">
+    <select id="user" name="post_sub[sub_id]">
+    <option value="<%=nil%>" selected="true" disabled="true"> Select a Sub </option>
+    <% Sub.all.each do |sub| %>
+      <% unless @post.subs.include?(sub) %>
+      <option value="<%=sub.id%>"> <%=sub.title%> </option>
+      <% end %>
+    <% end %>
+    <input type="hidden" name="post_sub[post_id]" value="<%=@post.id%>">
+    <input type="submit" name="" value="Cross-post!">
+    <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+  </form>
+  <% end %>
+
+</div>

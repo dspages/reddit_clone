@@ -1,0 +1,6 @@
+<h2> All users </h2>
+<ul style="list-style-type: none">
+  <% User.all.each do |user|  %>
+   <li> <%= link_to user.username, user_url(user) %> </li>
+  <% end  %>
+</ul>

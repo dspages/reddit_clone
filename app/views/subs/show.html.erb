@@ -1,0 +1,61 @@
+
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12 col-sm-8 col-md-8">
+      <h2> Posts </h2>
+        <% @sub.posts.each do |post| %>
+           <h4>
+            <%= link_to post.title, post_url(post)  %>
+          </h4>
+        <% end %>
+    </div>
+    <div class="col-xs-12 col-sm-4 col-md-4 text-right">
+      <h3><%= @sub.title %></h3>
+      <p><%= @sub.description %></p>
+    <h3>Mods</h3>
+    <ul style="list-style-type: none">
+      <% @sub.moderators.each do |moderator| %>
+
+          <li> <%= link_to moderator.username, user_url(moderator)  %> </li>
+
+      <% end %>
+    </ul>
+    <% if moderator?(@sub) %>
+      <h3> Mod Actions </h3>
+      <ul style="list-style-type: none">
+        <li> <%= link_to "Edit Sub", edit_sub_url %> </li>
+        <li> <%= link_to "Add Mod", new_moderation_url %> </li>
+      <ul>
+    <% end %>
+    </div>
+  </div>
+
+  <div class="row text-center">
+    <h3> New Post </h3>
+    <form action="<%= posts_url %>" method="post">
+      <div class="form-group">
+        <label for="title"> Title </label>
+        <br>
+        <input id="title" type="text" name="post[title]" value="">
+      </div>
+      <div class="form-group">
+        <label for="url"> URL </label>
+        <br>
+        <input id="url" type="text" name="post[url]" value="">
+      </div>
+      <div class="form-group">
+        <label> Content </label>
+        <br>
+        <textarea name="post[content]" value=""></textarea>
+      </div>
+      <div class="form-group">
+        <input class="btn btn-primary" type="submit" value="Create New Post">
+      </div>
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <input type="hidden" name="post[sub_id]" value="<%= @sub.id%>">
+    </form>
+  </div>
+
+
+</div>

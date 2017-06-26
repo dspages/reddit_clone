@@ -1,0 +1,25 @@
+<div class="container-fluid text-center">
+
+  <h1> Edit Sub </h1>
+  <form action="<%= sub_url(@sub) %>" method="post">
+    <div class="form-group">
+      <label for="title"> Title </label>
+      <br>
+      <input id="title" type="text" name="sub[title]" value="<%= @sub.title %>">
+    </div>
+    <div class="form-group">
+      <label> Description</label>
+      <br>
+      <textarea name="sub[description]">
+        <%= @sub.description %>
+      </textarea>
+    </div>
+    <div class="form-group">
+      <input class="btn btn-primary" type="submit" value="Edit Sub">
+    </div>
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <input type="hidden" name="_method" value="PATCH">
+  </form>
+
+    <%= link_to "Cancel", sub_url(@sub)  %>
+</div>

@@ -1,0 +1,8 @@
+<div class="container-fluid text-center">
+<%= link_to "Create New SubEddit", new_sub_url %>
+<h3> All SubEddits </h3>
+
+<% @subs.each do |sub| %>
+<%= link_to sub.title, sub_url(sub) %>
+<% end %>
+</div>

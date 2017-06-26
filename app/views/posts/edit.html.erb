@@ -1,0 +1,25 @@
+<div class="row text-center">
+  <h3> Edit Post </h3>
+  <form action="<%= post_url(@post) %>" method="post">
+    <div class="form-group">
+      <label for="title"> Title </label>
+      <br>
+      <input id="title" type="text" name="post[title]" value="<%=@post.title%>">
+    </div>
+    <div class="form-group">
+      <label for="url"> URL </label>
+      <br>
+      <input id="url" type="text" name="post[url]" value="<%=@post.url%>">
+    </div>
+    <div class="form-group">
+      <label> Content </label>
+      <br>
+      <textarea name="post[content]"><%=@post.content%></textarea>
+    </div>
+    <div class="form-group">
+      <input class="btn btn-primary" type="submit" value="Update Post">
+    </div>
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <input type="hidden" name="_method" value="patch">
+  </form>
+</div>

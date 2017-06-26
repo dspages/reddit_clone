@@ -1,0 +1,23 @@
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12 col-sm-8 col-md-8 text-left">
+      <h2> All Posts </h2>
+      <ul style="list-style-type: none">
+        <% @user.posts.each do |post| %>
+          <li> <%= link_to post.title, post_url(post) %> </li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="col-xs-12 col-sm-4 col-md-4 text-right">
+      <h3> <%= @user.username %>'s Home Page</h3>
+      <br>
+      <h4> Moderated SubEddits </h4>
+      <ul style="list-style-type: none">
+      <% @user.subs_moderated.each do |sub| %>
+        <li> <%= link_to sub.title, sub_url(sub) %> </li>
+      <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

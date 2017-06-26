@@ -1,0 +1,26 @@
+<div class="container-fluid text-center">
+  <h1> New Mod </h1>
+  <form action="<%= moderations_url %>" method="post">
+    <div class="form-group">
+      <label for="user"> User </label>
+      <br>
+      <input id="user" type="text" name="moderation[moderator_name]" value="">
+    </div>
+    <div class="form-group">
+      <label for="user"> Sub </label>
+      <br>
+      <select id="user" name="moderation[sub_id]">
+      <option value="<%=nil%>" selected="true" disabled="true"> Select a Sub </option>
+      <% current_user.subs_moderated.each do |sub| %>
+        <option value="<%=sub.id%>"> <%=sub.title%> </option>
+      <% end %>
+      </select>
+    </div>
+    <div class="form-group">
+      <input class="btn btn-primary" type="submit" value="Add Mod">
+    </div>
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  </form>
+
+  <%= link_to "Cancel", subs_url  %>
+</div>
