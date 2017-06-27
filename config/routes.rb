@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :users
   resource :session
   resources :posts do
-    resources :comments, only: [:create, :destroy]
+    resources :comments, only: [:new, :create, :destroy]
   end
   resources :subs
   resources :moderations

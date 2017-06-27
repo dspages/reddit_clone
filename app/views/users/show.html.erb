@@ -1,11 +1,20 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-xs-12 col-sm-8 col-md-8 text-left">
+    <div class="col-xs-12 col-sm-4 col-md-4 text-left">
       <h2> All Posts </h2>
       <ul style="list-style-type: none">
         <% @user.posts.each do |post| %>
           <li> <%= link_to post.title, post_url(post) %> </li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="col-xs-12 col-sm-4 col-md-4 text-left">
+      <h2> All Comments </h2>
+      <ul style="list-style-type: none">
+        <% @user.comments.each do |comment| %>
+          <li> <%= link_to comment.content[0..15], post_url(comment.post) %> <%= "..." if comment.content.length>10 %> </li>
+          <li><%=" in "+comment.post.title%></li>
         <% end %>
       </ul>
     </div>

@@ -1,0 +1,10 @@
+
+
+<% @comment.children.each do |comment| %>
+  <div class="well text-left">
+      <p><b> <%= link_to comment.author.username, user_url(comment.author) %> </b></p>
+    <%= comment.content %>
+    <% @justification += 1 %>
+    <br>
+  </div>
+<% end %>

@@ -8,25 +8,44 @@
 
   <h4 class="text-left"> Post Content: </h4>
   <div class="jumbotron">
-
+    <div class="well">
     <p> <%= @post.content %></p>
-  </div>
-  <% if current_user==@post.author %>
-    <%= link_to "Edit Post", edit_post_url(@post) %>
-    <%= link_to "Delete Post", post_url(@post), :method => :delete %>
+   </div>
 
-  <form class="" action="<%=post_subs_url%>" method="post">
-    <select id="user" name="post_sub[sub_id]">
-    <option value="<%=nil%>" selected="true" disabled="true"> Select a Sub </option>
-    <% Sub.all.each do |sub| %>
-      <% unless @post.subs.include?(sub) %>
-      <option value="<%=sub.id%>"> <%=sub.title%> </option>
+    <% if current_user==@post.author %>
+      <%= link_to "Edit Post", edit_post_url(@post) %>
+      <%= link_to "Delete Post", post_url(@post), :method => :delete %>
+    <form class="" action="<%=post_subs_url%>" method="post">
+      <select id="user" name="post_sub[sub_id]">
+      <option value="<%=nil%>" selected="true" disabled="true"> Select a Sub </option>
+      <% Sub.all.each do |sub| %>
+        <% unless @post.subs.include?(sub) %>
+        <option value="<%=sub.id%>"> <%=sub.title%> </option>
+        <% end %>
       <% end %>
+      <input type="hidden" name="post_sub[post_id]" value="<%=@post.id%>">
+      <input type="submit" name="" value="Cross-post!">
+      <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+    </form>
+
     <% end %>
-    <input type="hidden" name="post_sub[post_id]" value="<%=@post.id%>">
-    <input type="submit" name="" value="Cross-post!">
-    <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
-  </form>
+  </div>
+
+  <% @post.comments.each do |comment| %>
+    <% if comment.parent.nil? %>
+    <%@justification=0%>
+    <div class="well text-left">
+        <p><b> <%= link_to comment.author.username, user_url(comment.author) %> </b></p>
+      <%= comment.content %>
+        <% comment.children.each do |child| %>
+          <%= render "child_comment" %>
+        <% end %>
+      <br>
+      <%= link_to "Reply To Comment", new_post_comment_url(@post) %>
+    </div>
+    <% end %>
   <% end %>
+
+  <%= link_to "New Comment", new_post_comment_url(@post) %>
 
 </div>

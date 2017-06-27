@@ -1,6 +1,8 @@
 class Post < ApplicationRecord
   validates :author, :title, presence: true
 
+  has_many :comments
+
   belongs_to :author,
     primary_key: :id,
     foreign_key: :author_id,

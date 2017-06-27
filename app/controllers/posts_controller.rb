@@ -3,6 +3,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @justification=0
   end
 
   def create
@@ -16,7 +17,7 @@ class PostsController < ApplicationController
       redirect_to post_url(@post)
     else
       flash[:errors] = @post.errors.full_messages
-      redirect_to sub_url(@post.subs.first)
+      redirect_to subs_url
     end
   end
 
